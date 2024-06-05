@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milk Accounting App</title>
+
+    <style>
+        /* Resetting CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        input {
+            font-family: sans-serif;
+        }
+
+        button {
+            font-family: sans-serif;
+            cursor: pointer;
+            border: none;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        .form-container {
+            max-width: 320px;
+            /* background-color: aliceblue; */
+            margin: 20px auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .heading h1 {
+            font-size: 22px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form input {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid lightgray;
+        }
+
+        .form label {
+            margin-bottom: 7px;
+        }
+
+        .btn-p {
+            padding: 10px;
+            background-color: #0068e8;
+            color: white;
+            border-radius: 5px;
+            border: 1px solid lightgray;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <div class="heading">
+            <h1>Milk Accounting App</h1>
+        </div>
+        <div class="form">
+            <label for="rate">Rate</label>
+            <input type="number" id="rate" placeholder="Rate (Rupees/liter)" required>
+            <label for="dayHalfLiter">Days (1/2L)</label>
+            <input type="number" id="dayHalfLiter" value="0" required>
+            <label for="dayOneLiter">Days (1L)</label>
+            <input type="number" id="dayOneLiter" value="0" required>
+            <label for="dayDedLiter">Days (1.5L)</label>
+            <input type="number" id="dayDedLiter" value="0" required>
+            <label for="dayTwoLiter">Days (2L)</label>
+            <input type="number" id="dayTwoLiter" value="0" required>
+        </div>
+        <button class="btn-p" id="calc-btn">Calculate</button>
+        <div class="total">
+            <p id="total-p">Total amount to be paid = 0.0 Rupees</p>
+        </div>
+    </div>
+
+    <script>
+        const rateEl = document.getElementById("rate");
+        const dayHalfLiterEl = document.getElementById("dayHalfLiter");
+        const dayOneLiterEl = document.getElementById("dayOneLiter");
+        const dayDedLiterEl = document.getElementById("dayDedLiter");
+        const dayTwoLiterEl = document.getElementById("dayTwoLiter");
+
+        let total = 0;
+
+
+        const totalP = document.getElementById("total-p");
+
+        const calcBtn = document.getElementById("calc-btn");
+        calcBtn.addEventListener("click", () => {
+
+            let rate = parseInt(rateEl.value);
+            let dayHalfLiter = parseInt(dayHalfLiterEl.value);
+            let dayOneLiter = parseInt(dayOneLiterEl.value);
+            let dayDedLiter = parseInt(dayDedLiterEl.value);
+            let dayTwoLiter = parseInt(dayTwoLiterEl.value);
+
+            total = rate * (
+                dayHalfLiter * 0.5 +
+                dayOneLiter * 1 +
+                dayDedLiter * 1.5 +
+                dayTwoLiter * 2
+            )
+
+            totalP.textContent = `Total amount = ${total} Rupees`;
+        })
+
+    </script>
+</body>
+
+</html>
